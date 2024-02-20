@@ -22,6 +22,8 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id)
+    console.log(post.username)
+    console.log(req.body.username)
     if (post.username === req.body.username) {
       try {
         const updatePost = await Post.findByIdAndUpdate(
@@ -46,18 +48,27 @@ router.put("/:id", async (req, res) => {
 // delete
 router.delete("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id)
+    console.log("something")
+    // const post = await Post.findById(req.params.id)
+    // console.log(post.username)
+    // console.log(req.body.username)
     if (post.username === req.body.username) {
       try {
-        await post.delete()
-        res.status(200).json("Post Has been delete!")
+        console.log("successful")
+        // await post.delete()
+        post = await Post.findByIdAndDelete(req.params.id)
+        res.status(200).json({"success": "You have successfully deleted the post!"})
       } catch (error) {
+        console.log("fail1")
         res.status(500).json(error)
       }
-    } else {
+    } 
+    else {
+      console.log("fail2")
       res.status(401).json("You can delete only your post!")
     }
   } catch (error) {
+    console.log("fail3")
     res.status(500).json(error)
   }
 })
