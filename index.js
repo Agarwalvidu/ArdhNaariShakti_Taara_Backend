@@ -3,6 +3,7 @@ const express = require("express")
 const app = express()
 const dotenv = require("dotenv")
 const mongoose = require("mongoose")
+const port = process.env.PORT || 5000
 
 //---- step : 3
 const multer = require("multer")
@@ -60,6 +61,9 @@ app.use("/category", authCat)
 // app.use('/api', require('./routes/categories'))
 
 //---- step : 1.2
-app.listen("5000", () => {
-  console.log("backend running...")
+// app.listen("5000", () => {
+//   console.log("backend running...")
+// })
+app.listen(port, () => {
+  console.log(`iNotebook backend listening at http://localhost:${port}`)
 })
